@@ -22,7 +22,7 @@ jobs:
         #   run: cat dragon.txt
 
         - name: Execute Shell Script  #Commented steps are executed in Shell script
-          run: ./ascii-script.sh  #path of script
+          run: ./ascii-script.sh  #path of script in the repo
 
         - name: List files
           run: ls -lart
