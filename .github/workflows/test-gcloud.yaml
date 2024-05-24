@@ -9,8 +9,6 @@ jobs:
     steps:
     - name: Checkout
       uses: 'actions/checkout@v3'
-    - name: docker action
-      uses: docker://mohan9977/gcloud:latest
     - name: 'Auth'
       uses: 'google-github-actions/auth@v2'
       with:
