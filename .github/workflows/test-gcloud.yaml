@@ -6,7 +6,7 @@ permissions:
 jobs:  
   test-gcloud:
     runs-on: ubuntu-latest
-    container: mohan9977/gcloud:latest
+    #container: mohan9977/gcloud:latest
     steps:
     - name: Checkout
       uses: 'actions/checkout@v3'
