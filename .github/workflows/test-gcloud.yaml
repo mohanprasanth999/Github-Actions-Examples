@@ -6,6 +6,7 @@ permissions:
 jobs:  
   test-gcloud:
     runs-on: ubuntu-latest
+    container: mohan9977/gcloud:latest
     steps:
     - name: Checkout
       uses: 'actions/checkout@v3'
@@ -14,8 +15,7 @@ jobs:
       with:
         workload_identity_provider: "projects/382383563440/locations/global/workloadIdentityPools/github/providers/github"
         service_account: "terraform-sa@dynamic-hub-299513.iam.gserviceaccount.com"
-    - uses: docker://mohan9977/gcloud:latest
     - name: 'Use gcloud CLI'
-      run: echo $CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE && gcloud auth list
+      run: 'gcloud auth list'
     - name: 'try gcloud'
       run: 'gcloud compute instances list'
