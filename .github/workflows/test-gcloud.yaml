@@ -6,9 +6,9 @@ permissions:
 jobs:  
   test-gcloud:
     runs-on: ubuntu-latest
-    container: mohan9977/gcloud:latest
     steps:
     - uses: 'actions/checkout@v3'
+    - uses: docker://mohan9977/gcloud:latest
     - name: 'Auth'
       uses: 'google-github-actions/auth@v2'
       with:
