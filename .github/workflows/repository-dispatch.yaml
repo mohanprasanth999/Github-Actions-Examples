@@ -39,11 +39,11 @@ jobs:
           echo "setting matrix"
           MATRIX=$(jq -c . <<< '${{ toJson(github.event.client_payload.artefact.flavours) }}')
           echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
-    matrix-job:
-      needs: extract-payload-information
-      strategy:
-        flavour-info: ${{ fromJson(needs.extract-payload-information.outputs.matrix) }}
-      steps:
-        echo "printing all variables"
+  print-outputs:
+    needs: extract-payload-information
+    strategy:
+      flavour-info: ${{ fromJson(needs.extract-payload-information.outputs.matrix) }}
+    steps:
+      echo "printing all variables"
 
 
