@@ -1,17 +1,13 @@
 name: Pull & Deploy - DEV
-
 env:
   name: dev
-
 on:
   repository_dispatch:
     types:
       - test
-
 permissions:
   contents: 'read'
   id-token: 'write'
-
 jobs:
   extract-payload-information:
     runs-on: ubuntu-latest
@@ -25,16 +21,14 @@ jobs:
       REPOSITORY_PATH: ${{ steps.set-matrix.outputs.REPOSITORY_PATH }}
       PACKAGE_VERSION: ${{ steps.set-matrix.outputs.PACKAGE_VERSION }}
       CURRENT_ENV: ${{ steps.set-matrix.outputs.CURRENT_ENV }}
-
     steps:
       - name: Checkout main repository code
         uses: actions/checkout@v3
-
       - name: Read payload and set matrix
         id: set-matrix
         run: |
           MATRIX=$(echo "${{ toJson(github.event.client_payload.artefact.flavours) }}")
-        #echo "matrix=${MATRIX}" >> $GITHUB_OUTPUT
+          echo "matrix=${MATRIX}" >> $GITHUB_OUTPUT
           echo "PROJECT_ID=${{ github.event.client_payload.PROJECT_ID }}" >> $GITHUB_OUTPUT
           echo "BUCKET_NAME=${{ github.event.client_payload.BUCKET_NAME }}" >> $GITHUB_OUTPUT
           echo "APP_NAME=${{ github.event.client_payload.APP_NAME }}" >> $GITHUB_OUTPUT
