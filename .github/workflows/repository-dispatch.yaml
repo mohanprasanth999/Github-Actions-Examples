@@ -45,6 +45,5 @@ jobs:
         flavour-info: ${{ fromJson(needs.extract-payload-information.outputs.matrix) }}
       steps:
         echo "printing all variables"
-        echo "projectid: ${{ needs.extract-payload-information.outputs.PROJECT_ID }}
 
 
