@@ -22,7 +22,7 @@ jobs:
           -d '{
                 "event_type" : "test",
                 "client_payload" : {
-                  "artefact" : '"$(cat deployment-artefact/artefact.json)"'
+                  "artefact" : '"$(cat ./deployment-artefact/artefact.json)"'
                 }
               }'
 
