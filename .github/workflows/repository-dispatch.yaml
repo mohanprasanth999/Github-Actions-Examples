@@ -13,21 +13,21 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
-      PROJECT_ID: ${{ steps.set-matrix.outputs.PROJECT_ID }}
-      BUCKET_NAME: ${{ steps.set-matrix.outputs.BUCKET_NAME }}
-      APP_NAME: ${{ steps.set-matrix.outputs.APP_NAME }}
-      VERSION: ${{ steps.set-matrix.outputs.VERSION }}
-      NODE_VERSION: ${{ steps.set-matrix.outputs.NODE_VERSION }}
-      REPOSITORY_PATH: ${{ steps.set-matrix.outputs.REPOSITORY_PATH }}
-      PACKAGE_VERSION: ${{ steps.set-matrix.outputs.PACKAGE_VERSION }}
-      CURRENT_ENV: ${{ steps.set-matrix.outputs.CURRENT_ENV }}
+      PROJECT_ID: ${{ steps.set-variables.outputs.PROJECT_ID }}
+      BUCKET_NAME: ${{ steps.set-variables.outputs.BUCKET_NAME }}
+      APP_NAME: ${{ steps.set-variables.outputs.APP_NAME }}
+      VERSION: ${{ steps.set-variables.outputs.VERSION }}
+      NODE_VERSION: ${{ steps.set-variables.outputs.NODE_VERSION }}
+      REPOSITORY_PATH: ${{ steps.set-variables.outputs.REPOSITORY_PATH }}
+      PACKAGE_VERSION: ${{ steps.set-variables.outputs.PACKAGE_VERSION }}
+      CURRENT_ENV: ${{ steps.set-variables.outputs.CURRENT_ENV }}
     steps:
       - name: Checkout main repository code
         uses: actions/checkout@v3
       - name: Read payload and set matrix
-        id: set-matrix
+        id: set-variables
         run: |
-          echo "Starting to set matrix and other variables"
+          echo "Starting to set other variables"
           echo "PROJECT_ID=${{ github.event.client_payload.dev.projectid }}" >> $GITHUB_OUTPUT
           echo "BUCKET_NAME=${{ github.event.client_payload.dev.bucketname }}" >> $GITHUB_OUTPUT
           echo "APP_NAME=${{ github.event.client_payload.app_name }}" >> $GITHUB_OUTPUT
@@ -36,3 +36,5 @@ jobs:
           echo "REPOSITORY_PATH=${{ github.event.client_payload.repository_path }}" >> $GITHUB_OUTPUT
           echo "PACKAGE_VERSION=${{ github.event.client_payload.version }}" >> $GITHUB_OUTPUT
           echo "CURRENT_ENV=${{ env.name }}/deploy" >> $GITHUB_OUTPUT
+          echo "matrix="${{ toJson(github.event.client_payload.artefact.flavours) }}"" >> $GITHUB_OUTPUT
+
