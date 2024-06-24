@@ -28,8 +28,6 @@ jobs:
         id: set-matrix
         run: |
           echo "Starting to set matrix and other variables"
-          MATRIX="${{ toJson(github.event.client_payload.artefact.flavours) }}"
-          echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
           echo "PROJECT_ID=${{ github.event.client_payload.dev.projectid }}" >> $GITHUB_OUTPUT
           echo "BUCKET_NAME=${{ github.event.client_payload.dev.bucketname }}" >> $GITHUB_OUTPUT
           echo "APP_NAME=${{ github.event.client_payload.app_name }}" >> $GITHUB_OUTPUT
