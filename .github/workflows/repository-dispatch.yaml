@@ -34,7 +34,7 @@ jobs:
         id: set-matrix
         run: |
           MATRIX=$(echo "${{ toJson(github.event.client_payload.artefact.flavours) }}")
-          echo "matrix=${MATRIX}" >> $GITHUB_OUTPUT
+        #echo "matrix=${MATRIX}" >> $GITHUB_OUTPUT
           echo "PROJECT_ID=${{ github.event.client_payload.PROJECT_ID }}" >> $GITHUB_OUTPUT
           echo "BUCKET_NAME=${{ github.event.client_payload.BUCKET_NAME }}" >> $GITHUB_OUTPUT
           echo "APP_NAME=${{ github.event.client_payload.APP_NAME }}" >> $GITHUB_OUTPUT
