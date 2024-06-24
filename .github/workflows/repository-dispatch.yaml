@@ -37,5 +37,6 @@ jobs:
           echo "PACKAGE_VERSION=${{ github.event.client_payload.version }}" >> $GITHUB_OUTPUT
           echo "CURRENT_ENV=${{ env.name }}/deploy" >> $GITHUB_OUTPUT
           echo "setting matrix"
-          echo "matrix=${{ toJson(github.event.client_payload.artefact.flavours) }}" >> $GITHUB_OUTPUT
+          MATRIX=$(echo '${{ toJson(github.event.client_payload.flavours) }}')
+          echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
 
