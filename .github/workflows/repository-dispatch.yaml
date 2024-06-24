@@ -12,7 +12,7 @@ jobs:
   extract-payload-information:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      matrix: ${{ steps.set-variables.outputs.matrix }}
       PROJECT_ID: ${{ steps.set-variables.outputs.PROJECT_ID }}
       BUCKET_NAME: ${{ steps.set-variables.outputs.BUCKET_NAME }}
       APP_NAME: ${{ steps.set-variables.outputs.APP_NAME }}
@@ -39,4 +39,12 @@ jobs:
           echo "setting matrix"
           MATRIX=$(jq -c . <<< '${{ toJson(github.event.client_payload.artefact.flavours) }}')
           echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
+    matrix-job:
+      needs: extract-payload-information
+      strategy:
+        flavour-info: ${{ fromJson(needs.extract-payload-information.outputs.matrix) }}
+      steps:
+        echo "printing all variables"
+        echo "projectid: ${{ needs.extract-payload-information.outputs.PROJECT_ID }}
+
 
