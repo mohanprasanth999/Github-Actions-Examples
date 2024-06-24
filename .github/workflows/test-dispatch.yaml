@@ -19,5 +19,10 @@ jobs:
           -H "Accept: application/vnd.github+json" \
           -H "Authorization: Bearer ${{secrets.TOKEN}}" \
           https://api.github.com/repos/mohanprasanth999/Github-Actions-Examples/dispatches \
-          -d '{"event_type":"test","client_payload":{"artefact": '"$(cat deployment-artefact/artefact.json)"'}}'
+          -d '{
+                "event_type": "test",
+                "client_payload": {
+                  "artefact": '"$(cat deployment-artefact/artefact.json)"'
+                }
+              }'
 
