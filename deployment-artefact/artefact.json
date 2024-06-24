@@ -1,0 +1,25 @@
+{
+    "dev": {
+        "projectid": "project-K",
+        "bucketname": "bucket_k" 
+    },
+    "flavours": [
+      {
+        "flavour": "a",
+        "input": "abc/path",
+        "output": "xyz/path",
+        "to_deploy": true
+      },
+      {
+        "flavour": "b",
+        "input": "abc/path",
+        "output": "xyz/path",
+        "to_deploy": false
+      }
+    ],
+    "app_name": "Kalki",
+    "version": "1.0",
+    "node_version": "1.5.0",
+    "repository_path": "cinema"
+  }
+  
