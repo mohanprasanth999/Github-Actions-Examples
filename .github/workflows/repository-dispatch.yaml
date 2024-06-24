@@ -45,6 +45,8 @@ jobs:
     strategy:
       flavour-info: ${{ fromJson(needs.extract-payload-information.outputs.matrix) }}
     steps:
-      echo "printing all variables"
+      - name: print outputs
+        run: |
+          echo "printing all variables"
 
 
