@@ -44,7 +44,8 @@ jobs:
     - extract-payload-information
     runs-on: ubuntu-latest
     strategy:
-      flavour-info: ${{ fromJson(needs.extract-payload-information.outputs.matrix) }}
+      matrix:
+        flavour-info: ${{ fromJson(needs.extract-payload-information.outputs.matrix) }}
     steps:
       - name: print outputs
         run: |
