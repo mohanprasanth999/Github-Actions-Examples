@@ -1,6 +1,5 @@
 name: Test Repository Dispatch
 on: 
-  push
   workflow_dispatch
 permissions:
   contents: read
