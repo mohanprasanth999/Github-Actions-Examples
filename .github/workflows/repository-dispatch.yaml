@@ -50,6 +50,6 @@ jobs:
       - name: print outputs
         run: |
           echo "printing all variables"
-          echo ${{ fromJson(needs.extract-payload-information.outputs.PROJECT_ID) }}
+          echo ${{ needs.extract-payload-information.outputs.CURRENT_ENV) }}
 
 
