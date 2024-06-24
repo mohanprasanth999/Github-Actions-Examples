@@ -27,7 +27,7 @@ jobs:
       - name: Read payload and set matrix
         id: set-matrix
         run: |
-          MATRIX=$(echo "${{ toJson(github.event.client_payload.artefact.flavours) }}")
+          MATRIX=$(echo '${{ toJson(github.event.client_payload.artefact.flavours) }}')
           echo "matrix=${MATRIX}" >> $GITHUB_OUTPUT
           echo "PROJECT_ID=${{ github.event.client_payload.PROJECT_ID }}" >> $GITHUB_OUTPUT
           echo "BUCKET_NAME=${{ github.event.client_payload.BUCKET_NAME }}" >> $GITHUB_OUTPUT
@@ -36,7 +36,7 @@ jobs:
           echo "NODE_VERSION=${{ github.event.client_payload.NODE_VERSION }}" >> $GITHUB_OUTPUT
           echo "REPOSITORY_PATH=${{ github.event.client_payload.REPOSITORY_PATH }}" >> $GITHUB_OUTPUT
           echo "PACKAGE_VERSION=${{ github.event.client_payload.PACKAGE_VERSION }}" >> $GITHUB_OUTPUT
-          echo "CURRENT_ENV=\"${{env.name}}/deploy\"" >> $GITHUB_OUTPUT
+          echo "CURRENT_ENV=${{ env.name }}/deploy >> $GITHUB_OUTPUT
 
         # echo "Full payload without tojson: in ${{toJson(github.event.client_payload) }}"
         # echo "with toJson: in $(toJson(github.event.client_payload.artefact)}}"
