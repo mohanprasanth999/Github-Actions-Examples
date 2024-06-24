@@ -45,20 +45,20 @@ jobs:
           echo "PACKAGE_VERSION=${{ github.event.client_payload.PACKAGE_VERSION }}" >> $GITHUB_OUTPUT
           echo "CURRENT_ENV=\"${{env.name}}/deploy\"" >> $GITHUB_OUTPUT
 
-          # echo "Full payload without tojson: in ${{toJson(github.event.client_payload) }}"
-          # echo "with toJson: in $(toJson(github.event.client_payload.artefact)}}"
-          #echo "without toJson: \n ${((github.event.client_payload.artefact) }}"
-          # echo "${{ toJson(github.event.client_payload.artefact) }}"> artefact.json
-          #cat artefact.json
-          #MATRIX-5(jq -c [.flavours[] | select(.to deploy="true")]" artefact.json)
-          #echo::set-output name matrix:: SMATRIX
-          #echo "matrix object"
-          # echo "$MATRIX" | 19
-          #echo "PROJECT_ID-$(jq".\"$((env.name}}\".project_id" artefact.json)" >> SGITHUB OUTPUT
-          # echo "BUCKET_NAME-S(19 \"${{env.name)}}:bucket_name" artefact.json)" >> SGITHUB_OUTPUT
-          #echo "APP NAME-S(jg-c app name antefact.json) >> SGITHUB OUTPUT #echo "VERSION-S(10- version artefact.json)" >> SGITHUB OUTPUT
-          #echo "NODE VERSION-S(jqc.node version artefact.json)" >> $GITHUB OUTPUT
-          # echo "REPOSITORY_PATH-S(joc.repository path antefact.json) >> SGITHUB OUTPUT
-          #echo "PACKAGE VERSION-S(14 version/package.json)" >> $GITHUB_OUTPUT
-          #echo "CURRENT EIV-S(env.name/deploy\"" >> SGITHUB OUTPUT
+        # echo "Full payload without tojson: in ${{toJson(github.event.client_payload) }}"
+        # echo "with toJson: in $(toJson(github.event.client_payload.artefact)}}"
+        #echo "without toJson: \n ${((github.event.client_payload.artefact) }}"
+        # echo "${{ toJson(github.event.client_payload.artefact) }}"> artefact.json
+        #cat artefact.json
+        #MATRIX-5(jq -c [.flavours[] | select(.to deploy="true")]" artefact.json)
+        #echo::set-output name matrix:: SMATRIX
+        #echo "matrix object"
+        # echo "$MATRIX" | 19
+        #echo "PROJECT_ID-$(jq".\"$((env.name}}\".project_id" artefact.json)" >> SGITHUB OUTPUT
+        # echo "BUCKET_NAME-S(19 \"${{env.name)}}:bucket_name" artefact.json)" >> SGITHUB_OUTPUT
+        #echo "APP NAME-S(jg-c app name antefact.json) >> SGITHUB OUTPUT #echo "VERSION-S(10- version artefact.json)" >> SGITHUB OUTPUT
+        #echo "NODE VERSION-S(jqc.node version artefact.json)" >> $GITHUB OUTPUT
+        # echo "REPOSITORY_PATH-S(joc.repository path antefact.json) >> SGITHUB OUTPUT
+        #echo "PACKAGE VERSION-S(14 version/package.json)" >> $GITHUB_OUTPUT
+        #echo "CURRENT EIV-S(env.name/deploy\"" >> SGITHUB OUTPUT
 
