@@ -53,7 +53,7 @@ jobs:
           #MATRIX-5(jq -c [.flavours[] | select(.to deploy="true")]" artefact.json)
           #echo::set-output name matrix:: SMATRIX
           #echo "matrix object"
-          # echo "SMATRIX" | 19
+          # echo "$MATRIX" | 19
           #echo "PROJECT_ID-$(jq".\"$((env.name}}\".project_id" artefact.json)" >> SGITHUB OUTPUT
           # echo "BUCKET_NAME-S(19 \"${{env.name)}}:bucket_name" artefact.json)" >> SGITHUB_OUTPUT
           #echo "APP NAME-S(jg-c app name antefact.json) >> SGITHUB OUTPUT #echo "VERSION-S(10- version artefact.json)" >> SGITHUB OUTPUT
