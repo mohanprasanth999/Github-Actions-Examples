@@ -1,0 +1,64 @@
+name: Pull & Deploy - DEV
+
+env:
+  name: dev
+
+on:
+  repository_dispatch:
+    types:
+      - test
+
+permissions:
+  contents: 'read'
+  id-token: 'write'
+
+jobs:
+  extract-and-process-payload-information:
+    runs-on: dbgdbc_docker
+
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      PROJECT_ID: ${{ steps.set-matrix.outputs.PROJECT_ID }}
+      BUCKET_NAME: ${{ steps.set-matrix.outputs.BUCKET_NAME }}
+      APP_NAME: ${{ steps.set-matrix.outputs.APP_NAME }}
+      VERSION: ${{ steps.set-matrix.outputs.VERSION }}
+      NODE_VERSION: ${{ steps.set-matrix.outputs.NODE_VERSION }}
+      REPOSITORY_PATH: ${{ steps.set-matrix.outputs.REPOSITORY_PATH }}
+      PACKAGE_VERSION: ${{ steps.set-matrix.outputs.PACKAGE_VERSION }}
+      CURRENT_ENV: ${{ steps.set-matrix.outputs.CURRENT_ENV }}
+
+    steps:
+      - name: Checkout main repository code
+        uses: actions/checkout@v3
+
+      - name: Read payload and set matrix
+        id: set-matrix
+        run: |
+          MATRIX=$(echo "${{ toJson(github.event.client_payload.artefact.flavours) }}" | jq -r '.')
+          echo "matrix=${MATRIX}" >> $GITHUB_OUTPUT
+          echo "PROJECT_ID=${{ github.event.client_payload.PROJECT_ID }}" >> $GITHUB_OUTPUT
+          echo "BUCKET_NAME=${{ github.event.client_payload.BUCKET_NAME }}" >> $GITHUB_OUTPUT
+          echo "APP_NAME=${{ github.event.client_payload.APP_NAME }}" >> $GITHUB_OUTPUT
+          echo "VERSION=${{ github.event.client_payload.VERSION }}" >> $GITHUB_OUTPUT
+          echo "NODE_VERSION=${{ github.event.client_payload.NODE_VERSION }}" >> $GITHUB_OUTPUT
+          echo "REPOSITORY_PATH=${{ github.event.client_payload.REPOSITORY_PATH }}" >> $GITHUB_OUTPUT
+          echo "PACKAGE_VERSION=${{ github.event.client_payload.PACKAGE_VERSION }}" >> $GITHUB_OUTPUT
+          echo "CURRENT_ENV=\"${{env.name}}/deploy\"" >> $GITHUB_OUTPUT
+
+          # echo "Full payload without tojson: in ${{tolson(github.event.client_payload) }}"
+          # echo "with tojson: in $(tolson(github.event.client_payload.artefact)}}"
+          #echo "without tojson: \n ${((github.event.client_payload.artefact) }}"
+          # echo "${{ to son(github.event.client_payload.artefact) }}"> artefact.json
+          #cat artefact.json
+          #MATRIX-5(jq -c [.flavours[] | select(.to deploy="true")]" artefact.json)
+          #echo::set-output name matrix:: SMATRIX
+          #echo "matrix object"
+          # echo "SMATRIX" | 19
+          #echo "PROJECT_ID-$(jq".\"$((env.name}}\".project_id" artefact.json)" >> SGITHUB OUTPUT
+          # echo "BUCKET_NAME-S(19 \"${{env.name)}}:bucket_name" artefact.json)" >> SGITHUB_OUTPUT
+          #echo "APP NAME-S(jg-c app name antefact.json) >> SGITHUB OUTPUT #echo "VERSION-S(10- version artefact.json)" >> SGITHUB OUTPUT
+          #echo "NODE VERSION-S(jqc.node version artefact.json)" >> $GITHUB OUTPUT
+          # echo "REPOSITORY_PATH-S(joc.repository path antefact.json) >> SGITHUB OUTPUT
+          #echo "PACKAGE VERSION-S(14 version/package.json)" >> $GITHUB_OUTPUT
+          #echo "CURRENT EIV-S(env.name/deploy\"" >> SGITHUB OUTPUT
+
