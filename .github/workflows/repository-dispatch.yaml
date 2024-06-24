@@ -13,9 +13,8 @@ permissions:
   id-token: 'write'
 
 jobs:
-  extract-and-process-payload-information:
-    runs-on: dbgdbc_docker
-
+  extract-payload-information:
+    runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
       PROJECT_ID: ${{ steps.set-matrix.outputs.PROJECT_ID }}
