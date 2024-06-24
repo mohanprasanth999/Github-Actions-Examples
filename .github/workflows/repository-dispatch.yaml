@@ -37,7 +37,7 @@ jobs:
           echo "PACKAGE_VERSION=${{ github.event.client_payload.version }}" >> $GITHUB_OUTPUT
           echo "CURRENT_ENV=${{ env.name }}/deploy" >> $GITHUB_OUTPUT
           echo "setting matrix"
-          MATRIX=$(echo "${{ toJson(github.event.client_payload.artefact.flavours) }}" | jq -c '[.[] | select(.to_deploy == true)]')
+          MATRIX=$(echo '${{ toJson(github.event.client_payload.artefact.flavours) }}' | jq -c '[.[] | select(.to_deploy == true)]')
           echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
   print-outputs:
     needs: 
