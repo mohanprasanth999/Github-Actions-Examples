@@ -27,7 +27,7 @@ jobs:
       - name: Create Check Run
         id: create_check
         run: |
-          CHECK_PAYLOAD=`printf '{"name": "%s", "head_sha": "%s", "status": "in_progress"}' "${{ github.event.client_payload.arteafact.unique_id }}" "${{ github.sha }}"`
+          CHECK_PAYLOAD=`printf '{"name": "%s", "head_sha": "%s", "status": "in_progress"}' "${{ github.event.client_payload.artefact.unique_id }}" "${{ github.sha }}"`
           CHECK_RESULT=$(curl -s -X POST \
           -H "Accept: application/vnd.github.v3+json" \
           -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
