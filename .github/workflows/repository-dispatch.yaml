@@ -24,6 +24,17 @@ jobs:
     steps:
       - name: Checkout main repository code
         uses: actions/checkout@v3
+      - name: Create Check Run
+        id: create_check
+        run: |
+          CHECK_PAYLOAD=`printf '{"name": "%s", "head_sha": "%s", "status": "in_progress"}' "${{ github.event.client_payload.unique_id }}" "${{ github.sha }}"`
+          CHECK_RESULT=$(curl -s -X POST \
+          -H "Accept: application/vnd.github.v3+json" \
+          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          https://api.github.com/repos/${{ github.repository }}/check-runs \
+          -d "${CHECK_PAYLOAD}")
+          echo "Check run created"
+        shell: bash
       - name: Read payload and set matrix
         id: set-variables
         run: |
@@ -51,5 +62,13 @@ jobs:
         run: |
           echo "printing all variables"
           echo ${{ fromJson(needs.extract-payload-information.outputs.CURRENT_ENV) }}
+      - name: Update Check Run
+        run: |
+          CHECK_PAYLOAD=`printf '{"conclusion": "success", "completed_at": "%s", "status": "completed"}' "$(date -u +"%Y-%m-%dT%H:%M:%SZ")"`
+          curl -X PATCH https://api.github.com/repos/${{ github.repository }}/check-runs/${{ secrets.check_run_id }} \
+          -H "Accept: application/vnd.github.v3+json" \
+          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          -d "$CHECK_PAYLOAD"
+        shell: bash
 
 
