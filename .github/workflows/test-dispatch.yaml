@@ -21,6 +21,8 @@ jobs:
           https://api.github.com/repos/mohanprasanth999/Github-Actions-Examples/dispatches \
           -d '{
                 "event_type" : "test",
-                "client_payload" : '"$(cat ./deployment-artefact/artefact.json)"'
+                "client_payload" : {
+                  "artefact": '"$(cat ./deployment-artefact/artefact.json)"'
+                }
               }'
 
