@@ -27,7 +27,7 @@ jobs:
       - name: Create Check Run
         id: create_check
         run: |
-          CHECK_PAYLOAD=`printf '{"name": "%s", "head_sha": "%s", "status": "in_progress"}' "${{ github.event.client_payload.unique_id }}" "${{ github.sha }}"`
+          CHECK_PAYLOAD=`printf '{"name": "%s", "head_sha": "%s", "status": "in_progress"}' "${{ github.event.client_payload.arteafact.unique_id }}" "${{ github.sha }}"`
           CHECK_RESULT=$(curl -s -X POST \
           -H "Accept: application/vnd.github.v3+json" \
           -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
@@ -39,13 +39,13 @@ jobs:
         id: set-variables
         run: |
           echo "Starting to set other variables"
-          echo "PROJECT_ID=${{ github.event.client_payload.dev.projectid }}" >> $GITHUB_OUTPUT
-          echo "BUCKET_NAME=${{ github.event.client_payload.dev.bucketname }}" >> $GITHUB_OUTPUT
-          echo "APP_NAME=${{ github.event.client_payload.app_name }}" >> $GITHUB_OUTPUT
-          echo "VERSION=${{ github.event.client_payload.version }}" >> $GITHUB_OUTPUT
-          echo "NODE_VERSION=${{ github.event.client_payload.node_version }}" >> $GITHUB_OUTPUT
-          echo "REPOSITORY_PATH=${{ github.event.client_payload.repository_path }}" >> $GITHUB_OUTPUT
-          echo "PACKAGE_VERSION=${{ github.event.client_payload.version }}" >> $GITHUB_OUTPUT
+          echo "PROJECT_ID=${{ github.event.client_payload.artefact.dev.projectid }}" >> $GITHUB_OUTPUT
+          echo "BUCKET_NAME=${{ github.event.client_payload.artefact.dev.bucketname }}" >> $GITHUB_OUTPUT
+          echo "APP_NAME=${{ github.event.client_payload.artefact.app_name }}" >> $GITHUB_OUTPUT
+          echo "VERSION=${{ github.event.client_payload.artefact.version }}" >> $GITHUB_OUTPUT
+          echo "NODE_VERSION=${{ github.event.client_payload.artefact.node_version }}" >> $GITHUB_OUTPUT
+          echo "REPOSITORY_PATH=${{ github.event.client_payload.artefact.repository_path }}" >> $GITHUB_OUTPUT
+          echo "PACKAGE_VERSION=${{ github.event.client_payload.artefact.version }}" >> $GITHUB_OUTPUT
           echo "CURRENT_ENV=\"${{ env.name }}/deploy\"" >> $GITHUB_OUTPUT
           echo "setting matrix"
           MATRIX=$(echo '${{ toJson(github.event.client_payload.artefact.flavours) }}' | jq -c '[.[] | select(.to_deploy == true)]')
